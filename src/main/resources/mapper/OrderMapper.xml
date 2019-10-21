@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mujiwulian.ms.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.mujiwulian.ms.entity.Order">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="good_count" jdbcType="INTEGER" property="goodCount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, goods_id, good_count, `status`, create_time, pay_date
+  </sql>
+  <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO `order` ( goods_id, user_id, create_time, good_count, `status` )
+    VALUES ( #{goodsId} ,#{userId} ,#{createTime} ,#{goodsId} ,#{status} );
+  </insert>
+
+</mapper>

@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>秒杀页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        tr{
+            width: 100%;
+        }
+        .title{
+            text-shadow: 2px 2px 2px slategrey;
+        }
+        .msMsg{
+            color: red;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <h3>秒杀</h3>
+    <div>
+      <div class="title" th:text="${good.goodsName}">                </div>
+      <div th:text="${good.goodsTitle}">               </div>
+      <div><img th:src="@{${good.goodsImg}}">          </div>
+      <div th:text="${good.goodsDetail}">              </div>
+      <div th:text="'原价:'+${good.goodsPrice}">       </div>
+      <div th:text="'秒杀价:'+${good.seckilPrice}"></div>
+      <div th:text="'剩余秒杀数量:'+${good.stockCount}"></div>
+      <div>
+          <input type="hidden" id="countdownTime" th:value="${seconds}">
+          <p id="showTime"></p>
+          <p class="msMsg" th:if="${seconds} < 0">
+              <span>秒杀尚未开始 </span>
+          </p>
+          <p class="msMsg" th:if="${seconds} eq 0">
+              <span>秒杀已经结束</span>
+          </p>
+          <p class="msMsg" th:if="${seconds} > 0">
+              <span>秒杀进行中</span>
+          </p>
+          <form th:action="@{'/seckill/'+${good.id}}">
+              <input type="submit"  id="killButton" value="秒杀">
+          </form>
+      </div>
+    </div>
+    <script>
+        var countdownTime=document.getElementById("countdownTime").value;
+        var temp=-countdownTime;
+        function f() {
+            if(countdownTime<0){
+                document.getElementById("showTime").innerHTML=temp;
+                setTimeout(function time() {
+                    temp=temp-1;
+                    document.getElementById("showTime").innerHTML=temp;
+                    f();
+                },1000);
+                if(temp<=0){
+                    clearTimeout();
+                }
+                document.getElementById("killButton").disabled=true;
+            }else if(countdownTime>0){
+
+            }else{
+                // alert(document.getElementById("killButton").disabled);
+                document.getElementById("killButton").disabled=true;
+            }
+        }
+        window.onload=f();
+    </script>
+</body>
+</html> 

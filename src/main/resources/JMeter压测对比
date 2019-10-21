@@ -1,0 +1,31 @@
+3000并发
+
+未进行优化之前
+吞吐量:300/sec
+1.进行页面级,url缓存后
+吞吐量:500/sec
+2.进行对象级别缓存
+3.静态资源压缩合并，cnd优化==>了解
+
+对接口进行优化
+1.redis预减库存减少数据库的访问
+2.通过内存标记减少对redis的访问
+3.请求会先进入RabbitMQ，异步下单，增强用户体验
+5.Nginx水平扩展
+
+mycat 阿里-分库分表的中间件
+
+version: '2'
+services:
+  rabbitmq:
+    hostname: myrabbitmq
+    image: rabbitmq:management
+    ports:
+      - 15673:15672
+      - 5673:5672
+    restart: always
+    volumes:
+      - ./data:/var/lib/rabbitmq
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mujiwulian.ms.mapper.SecOrderMapper">
+  <resultMap id="BaseResultMap" type="com.mujiwulian.ms.entity.SecOrder">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, order_id, goods_id
+  </sql>
+    <select id="selectSecOrderByUserIdAndGoodsId" resultMap="BaseResultMap">
+        select * from sec_order
+        where  goods_id=#{goodsId,jdbcType=INTEGER}
+        and  user_id=#{userId,jdbcType=INTEGER}
+    </select>
+</mapper>
